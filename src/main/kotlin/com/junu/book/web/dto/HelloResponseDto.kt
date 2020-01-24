@@ -1,4 +1,4 @@
-package com.junu.book.dto
+package com.junu.book.web.dto
 
 data class HelloResponseDto(
         val name: String,

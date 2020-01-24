@@ -1,4 +1,4 @@
-package com.junu.book.dto
+package com.junu.book.web.dto
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
