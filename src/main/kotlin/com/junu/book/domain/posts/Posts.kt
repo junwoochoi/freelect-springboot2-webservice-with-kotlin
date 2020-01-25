@@ -1,10 +1,11 @@
 package com.junu.book.domain.posts
 
+import com.junu.book.domain.BaseTimeEntity
 import com.junu.book.web.dto.PostsUpdateRequestDto
 import javax.persistence.*
 
 @Entity
-class Posts(title: String, content: String, author: String) {
+class Posts(title: String, content: String, author: String) : BaseTimeEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

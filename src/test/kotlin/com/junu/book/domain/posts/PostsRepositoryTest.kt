@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
+import java.time.LocalDateTime
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
@@ -33,5 +34,23 @@ internal class PostsRepositoryTest(private val postsRepository: PostsRepository)
         assertThat(post.title).isEqualTo(title)
         assertThat(post.content).isEqualTo(content)
         assertThat(post.author).isEqualTo(author)
+    }
+
+    @Test
+    @DisplayName("BaseTimeEntity 적용")
+    fun testBaseTimeEntity() {
+        //given
+        val now = LocalDateTime.now()
+
+        val title = "게시글 제목"
+        val content = "게시글 본문"
+        val author = "junwoochoi@github.com"
+
+        //when
+        val savedPost = postsRepository.save(Posts(title = title, content = content, author = author))
+
+        //then
+        assertThat(savedPost.createdDate).isAfter(now)
+        assertThat(savedPost.modifiedDate).isAfter(now)
     }
 }
