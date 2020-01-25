@@ -1,6 +1,7 @@
 package com.junu.book.service.posts
 
 import com.junu.book.domain.posts.PostsRepository
+import com.junu.book.web.dto.PostsListResponseDto
 import com.junu.book.web.dto.PostsResponseDto
 import com.junu.book.web.dto.PostsSaveRequestDto
 import com.junu.book.web.dto.PostsUpdateRequestDto
@@ -26,5 +27,11 @@ class PostsService(private val postsRepository: PostsRepository) {
     fun findById(id: Long) : PostsResponseDto {
         val posts = postsRepository.findByIdOrNull(id) ?: throw IllegalArgumentException("해당 사용자가 없습니다 >> id:${id}")
         return PostsResponseDto(posts)
+    }
+
+    @Transactional(readOnly = true)
+    fun findAllDesc() : List<PostsListResponseDto>{
+        return postsRepository.findAllDesc()
+                .map { posts -> PostsListResponseDto(posts) }
     }
 }
