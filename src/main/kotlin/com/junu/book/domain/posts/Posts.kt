@@ -1,9 +1,11 @@
 package com.junu.book.domain.posts
 
+import com.junu.book.web.dto.PostsUpdateRequestDto
 import javax.persistence.*
 
 @Entity
 class Posts(title: String, content: String, author: String) {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
@@ -16,4 +18,10 @@ class Posts(title: String, content: String, author: String) {
         protected set
     var author: String = author
         protected set
+
+
+    fun update(postsUpdateRequestDto: PostsUpdateRequestDto) {
+        this.content = postsUpdateRequestDto.content
+        this.title = postsUpdateRequestDto.title
+    }
 }
