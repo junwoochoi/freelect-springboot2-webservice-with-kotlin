@@ -17,4 +17,7 @@ class PostsApiController(private val postsService: PostsService) {
     @PutMapping("/api/v1/posts/{id}")
     fun update(@PathVariable id: Long, @RequestBody postsUpdateRequestDto: PostsUpdateRequestDto) =
             postsService.update(id, postsUpdateRequestDto)
+    @DeleteMapping("/api/v1/posts/{id}")
+    fun delete(@PathVariable id: Long) = postsService.delete(id)
+
 }
