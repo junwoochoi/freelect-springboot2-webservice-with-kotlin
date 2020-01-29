@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultMatcher
@@ -21,11 +22,12 @@ import org.springframework.test.web.servlet.put
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @AutoConfigureMockMvc
+@WithMockUser(roles = ["USER"])
 internal class PostsApiControllerTest(
         private val mockMvc: MockMvc,
-        private val objectMapper : ObjectMapper,
+        private val objectMapper: ObjectMapper,
         private val postsRepository: PostsRepository
-        ) {
+) {
 
     @AfterEach
     fun cleanup() = postsRepository.deleteAll()
@@ -78,7 +80,7 @@ internal class PostsApiControllerTest(
         //then
         resultActionsDsl.andExpect {
             status { isOk }
-            ResultMatcher { it.response.contentAsString.toLongOrNull() == savedPost.id }
+            ResultMatcher { result -> assertThat(result.response.contentAsString.toLongOrNull()).isEqualTo(savedPost.id) }
         }
         assertThat(posts).hasSize(1)
         assertThat(posts[0].content).isEqualTo(updateContent)

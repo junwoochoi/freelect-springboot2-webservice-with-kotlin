@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.FilterType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
@@ -17,6 +18,7 @@ import org.springframework.test.web.servlet.get
             ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = [SecurityConfig::class])
         ])
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@WithMockUser(roles = ["USER"])
 internal class HelloControllerTest(private val mockMvc: MockMvc) {
 
     @ParameterizedTest

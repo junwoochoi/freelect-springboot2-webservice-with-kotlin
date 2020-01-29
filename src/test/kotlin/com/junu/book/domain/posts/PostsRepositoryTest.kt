@@ -45,9 +45,13 @@ internal class PostsRepositoryTest(private val postsRepository: PostsRepository)
         val title = "게시글 제목"
         val content = "게시글 본문"
         val author = "junwoochoi@github.com"
+        Thread.sleep(500)
 
         //when
         val savedPost = postsRepository.save(Posts(title = title, content = content, author = author))
+        val findAllDesc = postsRepository.findAllDesc()
+
+        println("생성 시간 : ${findAllDesc[0].createdDate} || 테스트 시작시간 : $now")
 
         //then
         assertThat(savedPost.createdDate).isAfter(now)
