@@ -20,4 +20,13 @@ class User(name: String, email: String, picture: String, role: Role) : BaseTimeE
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var role: Role = role
+
+    fun update(name: String, picture: String) : User {
+        this.name = name
+        this.picture = picture
+
+        return this
+    }
+
+    fun getRoleKey(): String = this.role.key
 }
