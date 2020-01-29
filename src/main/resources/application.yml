@@ -6,3 +6,5 @@ spring:
     properties:
       hiberate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  session:
+    store-type: jdbc
