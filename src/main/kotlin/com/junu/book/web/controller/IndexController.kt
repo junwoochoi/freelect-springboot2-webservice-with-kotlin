@@ -1,5 +1,6 @@
 package com.junu.book.web.controller
 
+import com.junu.book.config.auth.LoginUser
 import com.junu.book.config.auth.SessionUser
 import com.junu.book.service.posts.PostsService
 import org.springframework.stereotype.Controller
@@ -9,11 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable
 import javax.servlet.http.HttpSession
 
 @Controller
-class IndexController(private val postsService: PostsService, private val httpSession: HttpSession) {
+class IndexController(private val postsService: PostsService) {
     @GetMapping("/")
-    fun index(model: Model): String {
+    fun index(model: Model, @LoginUser sessionUser: SessionUser?): String {
         model.addAttribute("posts", postsService.findAllDesc())
-        val sessionUser = httpSession.getAttribute("user") as SessionUser?
         sessionUser?.let {
             model.addAttribute("userName", sessionUser.name)
         }
@@ -28,5 +28,5 @@ class IndexController(private val postsService: PostsService, private val httpSe
         val dto = postsService.findById(id)
         model.addAttribute("post", dto)
         return "posts-update"
-    }
+}
 }
