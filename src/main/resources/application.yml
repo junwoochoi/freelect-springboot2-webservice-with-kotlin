@@ -14,4 +14,4 @@ spring:
     store-type: jdbc
   h2:
     console:
-      enabled: true
+      enabled: false
