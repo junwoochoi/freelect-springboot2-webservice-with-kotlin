@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    include: oauth,real-db
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  session:
+    store-type: jdbc

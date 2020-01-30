@@ -34,6 +34,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.session:spring-session-jdbc")
     implementation("com.h2database:h2")
+    implementation("mysql:mysql-connector-java")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
